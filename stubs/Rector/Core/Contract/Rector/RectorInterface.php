@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Rector\Core\Contract\Rector;
 
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
 
 if (interface_exists(RectorInterface::class)) {
     return;

@@ -22,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "SimonSchaufi\\RuleDocGenerator\\": "src"
-        }
+        },
+        "files": [
+            "src/preload.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\Contract;
 
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 
 interface RuleCodeSamplePrinterInterface
 {
@@ -13,5 +14,5 @@ interface RuleCodeSamplePrinterInterface
     /**
      * @return string[]
      */
-    public function print(CodeSampleInterface $codeSample, RuleDefinition $ruleDefinition): array;
+    public function print(CodeSampleInterface $codeSample, DocumentedRule $documentedRule): array;
 }

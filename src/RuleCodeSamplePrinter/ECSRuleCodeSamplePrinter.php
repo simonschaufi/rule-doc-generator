@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
 use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
 use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 
 final class ECSRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
@@ -36,9 +36,9 @@ final class ECSRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
     /**
      * @return string[]
      */
-    public function print(CodeSampleInterface $codeSample, RuleDefinition $ruleDefinition): array
+    public function print(CodeSampleInterface $codeSample, DocumentedRule $documentedRule): array
     {
-        if (is_a($ruleDefinition->getRuleClass(), 'PHP_CodeSniffer\Sniffs\Sniff', true)) {
+        if (is_a($documentedRule->getRuleClass(), 'PHP_CodeSniffer\Sniffs\Sniff', true)) {
             return $this->badGoodCodeSamplePrinter->print($codeSample);
         }
 

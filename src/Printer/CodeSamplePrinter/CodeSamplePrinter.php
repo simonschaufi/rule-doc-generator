@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
-use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use Rector\RuleDoc\CodeSample\ConfiguredCodeSample;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
+use Rector\RuleDoc\Contract\ConfigurableRuleInterface;
 use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use SimonSchaufi\RuleDocGenerator\Exception\ConfigurationBoundException;
 use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\ECSRuleCodeSamplePrinter;
 use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\PHPStanRuleCodeSamplePrinter;
 use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\RectorRuleCodeSamplePrinter;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 
 /**
  * @see \SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\DirectoryToMarkdownPrinterTest
@@ -39,19 +39,19 @@ final class CodeSamplePrinter
     /**
      * @return string[]
      */
-    public function print(RuleDefinition $ruleDefinition): array
+    public function print(DocumentedRule $documentedRule): array
     {
         $lines = [];
 
-        foreach ($ruleDefinition->getCodeSamples() as $codeSample) {
-            $this->ensureConfigureRuleBoundsConfiguredCodeSample($codeSample, $ruleDefinition);
+        foreach ($documentedRule->getCodeSamples() as $codeSample) {
+            $this->ensureConfigureRuleBoundsConfiguredCodeSample($codeSample, $documentedRule);
 
             foreach ($this->ruleCodeSamplePrinters as $ruleCodeSamplePrinter) {
-                if (! $ruleCodeSamplePrinter->isMatch($ruleDefinition->getRuleClass())) {
+                if (! $ruleCodeSamplePrinter->isMatch($documentedRule->getRuleClass())) {
                     continue;
                 }
 
-                $newLines = $ruleCodeSamplePrinter->print($codeSample, $ruleDefinition);
+                $newLines = $ruleCodeSamplePrinter->print($codeSample, $documentedRule);
                 $lines = array_merge($lines, $newLines);
                 break;
             }
@@ -64,32 +64,37 @@ final class CodeSamplePrinter
 
     private function ensureConfigureRuleBoundsConfiguredCodeSample(
         CodeSampleInterface $codeSample,
-        RuleDefinition $ruleDefinition
+        DocumentedRule $documentedRule
     ): void {
         // ensure the configured rule + configure code sample are used
         if ($codeSample instanceof ConfiguredCodeSample) {
-            if (is_a($ruleDefinition->getRuleClass(), ConfigurableRuleInterface::class, true)) {
+            if ($this->isConfigurableRule($documentedRule->getRuleClass())) {
                 return;
             }
 
             $errorMessage = sprintf(
                 'The "%s" rule has configure code sample and must implements "%s" interface',
-                $ruleDefinition->getRuleClass(),
+                $documentedRule->getRuleClass(),
                 ConfigurableRuleInterface::class
             );
             throw new ConfigurationBoundException($errorMessage);
         }
 
-        if (! is_a($ruleDefinition->getRuleClass(), ConfigurableRuleInterface::class, true)) {
+        if (! $this->isConfigurableRule($documentedRule->getRuleClass())) {
             return;
         }
 
         $errorMessage = sprintf(
             'The "%s" rule implements "%s" and code sample must be "%s"',
-            $ruleDefinition->getRuleClass(),
+            $documentedRule->getRuleClass(),
             ConfigurableRuleInterface::class,
             ConfiguredCodeSample::class,
         );
         throw new ConfigurationBoundException($errorMessage);
+    }
+
+    private function isConfigurableRule(string $ruleClass): bool
+    {
+        return is_a($ruleClass, ConfigurableRuleInterface::class, true);
     }
 }

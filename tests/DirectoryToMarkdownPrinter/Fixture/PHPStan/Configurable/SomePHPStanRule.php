@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPStan\Configurable;
 
 use PHPStan\Rules\Rule;
-use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\CodeSample\ConfiguredCodeSample;
+use Rector\RuleDoc\Contract\ConfigurableRuleInterface;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 
 final class SomePHPStanRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {

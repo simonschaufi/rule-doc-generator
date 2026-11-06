@@ -8,8 +8,10 @@ use PHPStan\Type\Type;
 
 final class SomeValueObjectWrapper
 {
-    public function __construct(
-        private Type|null $argumentType = null
-    ) {
+    private ?Type $argumentType;
+
+    public function __construct(?Type $argumentType = null)
+    {
+        $this->argumentType = $argumentType;
     }
 }

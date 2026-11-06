@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample;
 
-use SimonSchaufi\RuleDocGenerator\ValueObject\AbstractCodeSample;
+use Rector\RuleDoc\AbstractCodeSample;
 
 final class ComposerJsonAwareCodeSample extends AbstractCodeSample
 {

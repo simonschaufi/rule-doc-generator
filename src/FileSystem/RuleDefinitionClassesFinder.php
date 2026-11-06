@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SimonSchaufi\RuleDocGenerator\FileSystem;
 
 use Nette\Loaders\RobotLoader;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
 use ReflectionClass;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 
 final class RuleDefinitionClassesFinder

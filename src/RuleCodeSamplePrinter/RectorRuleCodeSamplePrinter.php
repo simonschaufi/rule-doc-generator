@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
 use Rector\Contract\Rector\RectorInterface;
-use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
 use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 
 final class RectorRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
@@ -28,7 +28,7 @@ final class RectorRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterfac
     /**
      * @return string[]
      */
-    public function print(CodeSampleInterface $codeSample, RuleDefinition $ruleDefinition): array
+    public function print(CodeSampleInterface $codeSample, DocumentedRule $documentedRule): array
     {
         return $this->diffCodeSamplePrinter->print($codeSample);
     }

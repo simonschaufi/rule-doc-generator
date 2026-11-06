@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPStan\Standard;
 
 use PHPStan\Rules\Rule;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\CodeSample\CodeSample;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 
 final class SomePHPStanRule implements Rule, DocumentedRuleInterface
 {

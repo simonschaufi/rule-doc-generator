@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\Command;
 
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
 use ReflectionClass;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 use SimonSchaufi\RuleDocGenerator\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -62,24 +63,36 @@ final class ValidateCommand extends Command
         foreach ($classesByFilePaths as $ruleClass) {
             $ruleClassReflection = new ReflectionClass($ruleClass);
 
-            $documentedRule = $ruleClassReflection->newInstanceWithoutConstructor();
-            /** @var DocumentedRuleInterface $documentedRule */
-            $ruleDefinition = $documentedRule->getRuleDefinition();
+            $documentedRuleInstance = $ruleClassReflection->newInstanceWithoutConstructor();
+            if (! $documentedRuleInstance instanceof DocumentedRuleInterface) {
+                $this->symfonyStyle->error(sprintf(
+                    'Class "%s" must implement "%s"',
+                    $ruleClass,
+                    DocumentedRuleInterface::class
+                ));
 
-            if (strlen($ruleDefinition->getDescription()) < 10) {
+                $isValid = false;
+                continue;
+            }
+
+            $ruleDefinition = $documentedRuleInstance->getRuleDefinition();
+            $ruleDefinition->setRuleFilePath($ruleClassReflection->getFileName() ?: '');
+            $documentedRule = new DocumentedRule($ruleClass, $ruleDefinition);
+
+            if (strlen($documentedRule->getDescription()) < 10) {
                 $this->symfonyStyle->error(sprintf(
                     'Rule definition "%s" of "%s" is too short. Make it at least 10 chars',
-                    $ruleDefinition->getDescription(),
-                    $ruleDefinition->getRuleClass(),
+                    $documentedRule->getDescription(),
+                    $documentedRule->getRuleClass(),
                 ));
 
                 $isValid = false;
             }
 
-            if (count($ruleDefinition->getCodeSamples()) < 1) {
+            if (count($documentedRule->getCodeSamples()) < 1) {
                 $this->symfonyStyle->error(sprintf(
                     'Rule "%s" does not have any code samples. Ad at least one so documentation is clear',
-                    $ruleDefinition->getRuleClass(),
+                    $documentedRule->getRuleClass(),
                 ));
 
                 $isValid = false;

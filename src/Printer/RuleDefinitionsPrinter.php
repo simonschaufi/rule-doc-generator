@@ -7,7 +7,7 @@ namespace SimonSchaufi\RuleDocGenerator\Printer;
 use Nette\Utils\Strings;
 use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
 use SimonSchaufi\RuleDocGenerator\Text\KeywordHighlighter;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 use Webmozart\Assert\Assert;
 
 final class RuleDefinitionsPrinter
@@ -25,7 +25,7 @@ final class RuleDefinitionsPrinter
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
+     * @param DocumentedRule[] $ruleDefinitions
      * @return string[]
      */
     public function print(array $ruleDefinitions, ?int $categorizeLevel): array
@@ -53,17 +53,17 @@ final class RuleDefinitionsPrinter
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
-     * @return array<string, RuleDefinition[]>
+     * @param DocumentedRule[] $ruleDefinitions
+     * @return array<string, DocumentedRule[]>
      */
     private function groupDefinitionsByCategory(array $ruleDefinitions, int $categorizeLevel): array
     {
         $ruleDefinitionsByCategory = [];
 
         // have a convention from namespace :)
-        foreach ($ruleDefinitions as $ruleDefinition) {
-            $category = $this->resolveCategory($ruleDefinition, $categorizeLevel);
-            $ruleDefinitionsByCategory[$category][] = $ruleDefinition;
+        foreach ($ruleDefinitions as $documentedRule) {
+            $category = $this->resolveCategory($documentedRule, $categorizeLevel);
+            $ruleDefinitionsByCategory[$category][] = $documentedRule;
         }
 
         ksort($ruleDefinitionsByCategory);
@@ -72,28 +72,28 @@ final class RuleDefinitionsPrinter
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
+     * @param DocumentedRule[] $ruleDefinitions
      * @param string[] $lines
      * @return string[]
      */
     private function printRuleDefinitions(array $ruleDefinitions, array $lines, ?int $categorizeLevel): array
     {
-        foreach ($ruleDefinitions as $ruleDefinition) {
+        foreach ($ruleDefinitions as $documentedRule) {
             if ($categorizeLevel) {
-                $lines[] = '### ' . $ruleDefinition->getRuleShortClass();
+                $lines[] = '### ' . $documentedRule->getRuleShortClass();
             } else {
-                $lines[] = '## ' . $ruleDefinition->getRuleShortClass();
+                $lines[] = '## ' . $documentedRule->getRuleShortClass();
             }
 
-            $lines[] = $this->keywordHighlighter->highlight($ruleDefinition->getDescription());
+            $lines[] = $this->keywordHighlighter->highlight($documentedRule->getDescription());
 
-            if ($ruleDefinition->isConfigurable()) {
+            if ($documentedRule->isConfigurable()) {
                 $lines[] = ':wrench: **configure it!**';
             }
 
-            $lines[] = '- class: [`' . $ruleDefinition->getRuleClass() . '`](' . $ruleDefinition->getRuleFilePath() . ')';
+            $lines[] = '- class: [`' . $documentedRule->getRuleClass() . '`](' . $documentedRule->getRuleFilePath() . ')';
 
-            $codeSampleLines = $this->codeSamplePrinter->print($ruleDefinition);
+            $codeSampleLines = $this->codeSamplePrinter->print($documentedRule);
             $lines = array_merge($lines, $codeSampleLines);
         }
 
@@ -101,7 +101,7 @@ final class RuleDefinitionsPrinter
     }
 
     /**
-     * @param array<string, RuleDefinition[]> $ruleDefinitionsByCategory
+     * @param array<string, DocumentedRule[]> $ruleDefinitionsByCategory
      * @return string[]
      */
     private function createCategoryMenu(array $ruleDefinitionsByCategory): array
@@ -121,9 +121,9 @@ final class RuleDefinitionsPrinter
         return $lines;
     }
 
-    private function resolveCategory(RuleDefinition $ruleDefinition, int $categorizeLevel): string
+    private function resolveCategory(DocumentedRule $documentedRule, int $categorizeLevel): string
     {
-        $classNameParts = explode('\\', $ruleDefinition->getRuleClass());
+        $classNameParts = explode('\\', $documentedRule->getRuleClass());
 
         // get one namespace before last by convention
         array_pop($classNameParts);

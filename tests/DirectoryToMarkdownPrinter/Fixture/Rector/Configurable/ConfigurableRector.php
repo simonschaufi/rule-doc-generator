@@ -6,11 +6,12 @@ namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture
 
 use PhpParser\Node;
 use Rector\Contract\Rector\RectorInterface;
-use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\CodeSample\ConfiguredCodeSample;
+use Rector\RuleDoc\Contract\ConfigurableRuleInterface;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 
-final class ConfigurableRector implements RectorInterface, ConfigurableRuleInterface
+final class ConfigurableRector implements RectorInterface, ConfigurableRuleInterface, DocumentedRuleInterface
 {
     public function getRuleDefinition(): RuleDefinition
     {

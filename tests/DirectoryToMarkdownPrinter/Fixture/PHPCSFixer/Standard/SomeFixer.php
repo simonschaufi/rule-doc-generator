@@ -7,9 +7,9 @@ namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\CodeSample\CodeSample;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 
 final class SomeFixer extends AbstractFixer implements DocumentedRuleInterface
 {

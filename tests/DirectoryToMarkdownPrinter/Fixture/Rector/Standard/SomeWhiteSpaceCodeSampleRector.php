@@ -6,9 +6,9 @@ namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture
 
 use PhpParser\Node;
 use Rector\Rector\AbstractRector;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use Rector\RuleDoc\CodeSample\CodeSample;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 
 final class SomeWhiteSpaceCodeSampleRector extends AbstractRector implements DocumentedRuleInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator;
 
-use SimonSchaufi\RuleDocGenerator\Exception\ShouldNotHappenException;
+use Rector\RuleDoc\Exception\ShouldNotHappenException;
 use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
 use SimonSchaufi\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
 use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;

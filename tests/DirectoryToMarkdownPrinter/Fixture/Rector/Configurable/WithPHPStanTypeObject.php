@@ -7,12 +7,13 @@ namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture
 use PhpParser\Node;
 use PHPStan\Type\ObjectType;
 use Rector\Contract\Rector\RectorInterface;
-use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use Rector\RuleDoc\CodeSample\ConfiguredCodeSample;
+use Rector\RuleDoc\Contract\ConfigurableRuleInterface;
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\RuleDefinition;
 use SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Source\SomeValueObjectWrapper;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class WithPHPStanTypeObject implements RectorInterface, ConfigurableRuleInterface
+final class WithPHPStanTypeObject implements RectorInterface, ConfigurableRuleInterface, DocumentedRuleInterface
 {
     /**
      * @var string

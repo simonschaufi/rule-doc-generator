@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
 use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
 
 final class BadGoodCodeSamplePrinter

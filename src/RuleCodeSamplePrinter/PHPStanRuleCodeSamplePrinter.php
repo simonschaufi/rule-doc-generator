@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use Rector\RuleDoc\CodeSample\ConfiguredCodeSample;
+use Rector\RuleDoc\Contract\CodeSampleInterface;
 use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
 use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
 use SimonSchaufi\RuleDocGenerator\Printer\NeonPrinter;
-use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 
 final class PHPStanRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
@@ -38,10 +38,10 @@ final class PHPStanRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterfa
     /**
      * @return string[]
      */
-    public function print(CodeSampleInterface $codeSample, RuleDefinition $ruleDefinition): array
+    public function print(CodeSampleInterface $codeSample, DocumentedRule $documentedRule): array
     {
         if ($codeSample instanceof ConfiguredCodeSample) {
-            return $this->printConfigurableCodeSample($codeSample, $ruleDefinition);
+            return $this->printConfigurableCodeSample($codeSample, $documentedRule);
         }
 
         return $this->badGoodCodeSamplePrinter->print($codeSample);
@@ -52,14 +52,14 @@ final class PHPStanRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterfa
      */
     private function printConfigurableCodeSample(
         ConfiguredCodeSample $configuredCodeSample,
-        RuleDefinition $ruleDefinition
+        DocumentedRule $documentedRule
     ): array {
         $lines = [];
 
         $phpStanNeon = [
             'services' => [
                 [
-                    'class' => $ruleDefinition->getRuleClass(),
+                    'class' => $documentedRule->getRuleClass(),
                     'tags' => ['phpstan.rules.rule'],
                     'arguments' => $configuredCodeSample->getConfiguration(),
                 ],

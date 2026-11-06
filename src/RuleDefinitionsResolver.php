@@ -4,52 +4,54 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator;
 
+use Rector\RuleDoc\Contract\DocumentedRuleInterface;
+use Rector\RuleDoc\Exception\ShouldNotHappenException;
 use ReflectionClass;
-use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use SimonSchaufi\RuleDocGenerator\Exception\ShouldNotHappenException;
+use SimonSchaufi\RuleDocGenerator\ValueObject\DocumentedRule;
 use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
-use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class RuleDefinitionsResolver
 {
     /**
      * @param RuleClassWithFilePath[] $ruleClassWithFilePaths
-     * @return RuleDefinition[]
+     * @return DocumentedRule[]
      */
     public function resolveFromClassNames(array $ruleClassWithFilePaths): array
     {
-        $ruleDefinitions = [];
+        $documentedRules = [];
 
         foreach ($ruleClassWithFilePaths as $ruleClassWithFilePath) {
             $reflectionClass = new ReflectionClass($ruleClassWithFilePath->getClass());
 
-            $documentedRule = $reflectionClass->newInstanceWithoutConstructor();
-            if (! $documentedRule instanceof DocumentedRuleInterface) {
-                throw new ShouldNotHappenException();
+            $rule = $reflectionClass->newInstanceWithoutConstructor();
+            if (! $rule instanceof DocumentedRuleInterface) {
+                throw new ShouldNotHappenException(sprintf(
+                    'Class "%s" must implement "%s"',
+                    $ruleClassWithFilePath->getClass(),
+                    DocumentedRuleInterface::class
+                ));
             }
 
-            $ruleDefinition = $documentedRule->getRuleDefinition();
-            $ruleDefinition->setRuleClass($ruleClassWithFilePath->getClass());
-
+            $ruleDefinition = $rule->getRuleDefinition();
             $ruleDefinition->setRuleFilePath($ruleClassWithFilePath->getPath());
 
-            $ruleDefinitions[] = $ruleDefinition;
+            $documentedRules[] = new DocumentedRule($ruleClassWithFilePath->getClass(), $ruleDefinition);
         }
 
-        return $this->sortByClassName($ruleDefinitions);
+        return $this->sortByClassName($documentedRules);
     }
 
     /**
-     * @param RuleDefinition[] $ruleDefinitions
-     * @return RuleDefinition[]
+     * @param DocumentedRule[] $documentedRules
+     * @return DocumentedRule[]
      */
-    private function sortByClassName(array $ruleDefinitions): array
+    private function sortByClassName(array $documentedRules): array
     {
         usort(
-            $ruleDefinitions,
-            static fn (RuleDefinition $firstRuleDefinition, RuleDefinition $secondRuleDefinition): int => $firstRuleDefinition->getRuleShortClass() <=> $secondRuleDefinition->getRuleShortClass()
+            $documentedRules,
+            static fn (DocumentedRule $firstDocumentedRule, DocumentedRule $secondDocumentedRule): int => $firstDocumentedRule->getRuleShortClass() <=> $secondDocumentedRule->getRuleShortClass()
         );
 
-        return $ruleDefinitions;
+        return $documentedRules;
     }
 }
