@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPCSFixer\Standard;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPCSFixer\Standard;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class SomeFixer extends AbstractFixer implements DocumentedRuleInterface
 {

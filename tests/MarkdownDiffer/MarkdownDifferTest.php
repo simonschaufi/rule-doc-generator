@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\MarkdownDiffer;
+namespace SimonSchaufi\RuleDocGenerator\Tests\MarkdownDiffer;
 
-use Symplify\RuleDocGenerator\Printer\Markdown\MarkdownDiffer;
-use Symplify\RuleDocGenerator\Tests\AbstractTestCase;
+use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownDiffer;
+use SimonSchaufi\RuleDocGenerator\Tests\AbstractTestCase;
 
 final class MarkdownDifferTest extends AbstractTestCase
 {

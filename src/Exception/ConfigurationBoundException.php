@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Exception;
+namespace SimonSchaufi\RuleDocGenerator\Exception;
 
 use Exception;
 

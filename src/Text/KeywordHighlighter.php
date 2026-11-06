@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Text;
+namespace SimonSchaufi\RuleDocGenerator\Text;
 
 use Nette\Utils\Strings;
 use Throwable;
 
 /**
- * @see \Symplify\RuleDocGenerator\Tests\Text\KeywordHighlighterTest
+ * @see \SimonSchaufi\RuleDocGenerator\Tests\Text\KeywordHighlighterTest
  */
 final class KeywordHighlighter
 {

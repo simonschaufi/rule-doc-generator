@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\FileSystem;
+namespace SimonSchaufi\RuleDocGenerator\FileSystem;
 
 use Symfony\Component\Filesystem\Filesystem;
 

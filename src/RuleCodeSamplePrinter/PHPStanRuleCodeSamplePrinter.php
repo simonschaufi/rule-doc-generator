@@ -2,23 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
-use Symplify\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
-use Symplify\RuleDocGenerator\Printer\NeonPrinter;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
+use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
+use SimonSchaufi\RuleDocGenerator\Printer\NeonPrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class PHPStanRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
+    private NeonPrinter $neonPrinter;
+
+    private MarkdownCodeWrapper $markdownCodeWrapper;
+
+    private BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter;
+
     public function __construct(
-        private readonly NeonPrinter $neonPrinter,
-        private readonly MarkdownCodeWrapper $markdownCodeWrapper,
-        private readonly BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter
+        NeonPrinter $neonPrinter,
+        MarkdownCodeWrapper $markdownCodeWrapper,
+        BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter
     ) {
+        $this->badGoodCodeSamplePrinter = $badGoodCodeSamplePrinter;
+        $this->markdownCodeWrapper = $markdownCodeWrapper;
+        $this->neonPrinter = $neonPrinter;
     }
 
     public function isMatch(string $class): bool

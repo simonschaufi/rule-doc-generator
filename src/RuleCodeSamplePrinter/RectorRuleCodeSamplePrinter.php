@@ -2,19 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
 use Rector\Contract\Rector\RectorInterface;
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
+use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class RectorRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
+    private DiffCodeSamplePrinter $diffCodeSamplePrinter;
+
     public function __construct(
-        private readonly DiffCodeSamplePrinter $diffCodeSamplePrinter,
+        DiffCodeSamplePrinter $diffCodeSamplePrinter
     ) {
+        $this->diffCodeSamplePrinter = $diffCodeSamplePrinter;
     }
 
     public function isMatch(string $class): bool

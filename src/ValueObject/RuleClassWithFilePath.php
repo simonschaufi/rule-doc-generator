@@ -2,15 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\ValueObject;
+namespace SimonSchaufi\RuleDocGenerator\ValueObject;
 
 final class RuleClassWithFilePath
 {
+    private string $class;
+
+    private string $path;
+
+    private bool $isDeprecated;
+
     public function __construct(
-        private readonly string $class,
-        private readonly string $path,
-        private readonly bool $isDeprecated
+        string $class,
+        string $path,
+        bool $isDeprecated
     ) {
+        $this->isDeprecated = $isDeprecated;
+        $this->path = $path;
+        $this->class = $class;
     }
 
     public function getClass(): string

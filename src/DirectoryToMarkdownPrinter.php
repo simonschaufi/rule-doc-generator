@@ -2,25 +2,37 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator;
+namespace SimonSchaufi\RuleDocGenerator;
 
+use SimonSchaufi\RuleDocGenerator\Exception\ShouldNotHappenException;
+use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
+use SimonSchaufi\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
-use Symplify\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
-use Symplify\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
-use Symplify\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 
 /**
- * @see \Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\DirectoryToMarkdownPrinterTest
+ * @see \SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\DirectoryToMarkdownPrinterTest
  */
 final class DirectoryToMarkdownPrinter
 {
+    private RuleDefinitionClassesFinder $classByTypeFinder;
+
+    private SymfonyStyle $symfonyStyle;
+
+    private RuleDefinitionsResolver $ruleDefinitionsResolver;
+
+    private RuleDefinitionsPrinter $ruleDefinitionsPrinter;
+
     public function __construct(
-        private readonly RuleDefinitionClassesFinder $classByTypeFinder,
-        private readonly SymfonyStyle $symfonyStyle,
-        private readonly RuleDefinitionsResolver $ruleDefinitionsResolver,
-        private readonly RuleDefinitionsPrinter $ruleDefinitionsPrinter,
+        RuleDefinitionClassesFinder $classByTypeFinder,
+        SymfonyStyle $symfonyStyle,
+        RuleDefinitionsResolver $ruleDefinitionsResolver,
+        RuleDefinitionsPrinter $ruleDefinitionsPrinter
     ) {
+        $this->ruleDefinitionsPrinter = $ruleDefinitionsPrinter;
+        $this->ruleDefinitionsResolver = $ruleDefinitionsResolver;
+        $this->symfonyStyle = $symfonyStyle;
+        $this->classByTypeFinder = $classByTypeFinder;
     }
 
     /**

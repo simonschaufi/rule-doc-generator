@@ -21,13 +21,14 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->importNames();
+    $rectorConfig->importShortClasses(false);
 
     $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_81,
+        LevelSetList::UP_TO_PHP_74,
         SetList::CODING_STYLE,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         SetList::PRIVATIZATION,
-        PHPUnitSetList::PHPUNIT_100,
+        PHPUnitSetList::COMPOSER_BASED,
     ]);
 };

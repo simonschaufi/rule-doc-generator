@@ -1,13 +1,13 @@
 # Rule Doc Generator
 
-Generate Documentation for you Sniffer, Fixer, Rector, PHPStan... any rule in nice styled Markdown syntax with PHP Code examples everyone will understand.
+Generate Documentation for your Sniffer, Fixer, Rector, PHPStan... any rule in nice styled Markdown syntax with PHP Code examples everyone will understand.
 
-[![Downloads total](https://img.shields.io/packagist/dt/symplify/rule-doc-generator.svg?style=flat-square)](https://packagist.org/packages/symplify/rule-doc-generator/stats)
+[![Downloads total](https://img.shields.io/packagist/dt/simonschaufi/rule-doc-generator.svg?style=flat-square)](https://packagist.org/packages/simonschaufi/rule-doc-generator/stats)
 
 ## Install
 
 ```bash
-composer require symplify/rule-doc-generator --dev
+composer require simonschaufi/rule-doc-generator --dev
 ```
 
 ## Usage
@@ -21,7 +21,5 @@ vendor/bin/rule-doc-generator generate src/Rules
 The file will be generated to `/docs/rules_overview.md` by default. To change that, use `--output-file`:
 
 ```bash
-vendor/bin/rule-doc-generator generate src/Rules --output-file docs/symplify_rules.md
+vendor/bin/rule-doc-generator generate src/Rules --output-file docs/my-rules.md
 ```
-
-Happy coding!

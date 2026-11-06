@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPStan\Configurable;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\PHPStan\Configurable;
 
 use PHPStan\Rules\Rule;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class SomePHPStanRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {

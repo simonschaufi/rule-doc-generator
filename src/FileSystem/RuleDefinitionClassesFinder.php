@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\FileSystem;
+namespace SimonSchaufi\RuleDocGenerator\FileSystem;
 
 use Nette\Loaders\RobotLoader;
 use ReflectionClass;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 
 final class RuleDefinitionClassesFinder
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Source;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Source;
 
 use PHPStan\Type\Type;
 

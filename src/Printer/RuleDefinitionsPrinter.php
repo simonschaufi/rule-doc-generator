@@ -2,20 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer;
+namespace SimonSchaufi\RuleDocGenerator\Printer;
 
 use Nette\Utils\Strings;
-use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
-use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\Text\KeywordHighlighter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
 final class RuleDefinitionsPrinter
 {
+    private CodeSamplePrinter $codeSamplePrinter;
+
+    private KeywordHighlighter $keywordHighlighter;
+
     public function __construct(
-        private readonly CodeSamplePrinter $codeSamplePrinter,
-        private readonly KeywordHighlighter $keywordHighlighter,
+        CodeSamplePrinter $codeSamplePrinter,
+        KeywordHighlighter $keywordHighlighter
     ) {
+        $this->keywordHighlighter = $keywordHighlighter;
+        $this->codeSamplePrinter = $codeSamplePrinter;
     }
 
     /**

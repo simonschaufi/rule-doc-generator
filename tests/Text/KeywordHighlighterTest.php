@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\Text;
+namespace SimonSchaufi\RuleDocGenerator\Tests\Text;
 
-use Iterator;
-use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\RuleDocGenerator\Tests\AbstractTestCase;
-use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
+use SimonSchaufi\RuleDocGenerator\Tests\AbstractTestCase;
+use SimonSchaufi\RuleDocGenerator\Text\KeywordHighlighter;
 
 final class KeywordHighlighterTest extends AbstractTestCase
 {
@@ -18,14 +16,7 @@ final class KeywordHighlighterTest extends AbstractTestCase
         $this->keywordHighlighter = $this->make(KeywordHighlighter::class);
     }
 
-    #[DataProvider('provideData')]
-    public function test(string $inputText, string $expectedHighlightedText): void
-    {
-        $highlightedText = $this->keywordHighlighter->highlight($inputText);
-        $this->assertSame($expectedHighlightedText, $highlightedText);
-    }
-
-    public static function provideData(): Iterator
+    public static function provideData(): \Iterator
     {
         yield ['some @var text', 'some `@var` text'];
         yield ['@param @var text', '`@param` `@var` text'];
@@ -38,5 +29,14 @@ final class KeywordHighlighterTest extends AbstractTestCase
             'autowire(), autoconfigure(), and public() are required in config service',
             '`autowire()`, `autoconfigure()`, and `public()` are required in config service',
         ];
+    }
+
+    /**
+     * @dataProvider provideData()
+     */
+    public function test(string $inputText, string $expectedHighlightedText): void
+    {
+        $highlightedText = $this->keywordHighlighter->highlight($inputText);
+        $this->assertSame($expectedHighlightedText, $highlightedText);
     }
 }

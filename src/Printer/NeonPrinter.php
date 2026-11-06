@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer;
+namespace SimonSchaufi\RuleDocGenerator\Printer;
 
 use Nette\Utils\Strings;
 use Symfony\Component\Yaml\Yaml;

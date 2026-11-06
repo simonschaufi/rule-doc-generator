@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // 1. autoload
-use Symplify\RuleDocGenerator\DependencyInjection\ContainerFactory;
+use SimonSchaufi\RuleDocGenerator\DependencyInjection\ContainerFactory;
 
 $possibleAutoloadPaths = [
     // after split package

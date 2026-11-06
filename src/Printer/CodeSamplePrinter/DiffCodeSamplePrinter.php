@@ -2,16 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Printer\Markdown\MarkdownDiffer;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownDiffer;
 
 final class DiffCodeSamplePrinter
 {
+    private MarkdownDiffer $markdownDiffer;
+
     public function __construct(
-        private readonly MarkdownDiffer $markdownDiffer
+        MarkdownDiffer $markdownDiffer
     ) {
+        $this->markdownDiffer = $markdownDiffer;
     }
 
     /**

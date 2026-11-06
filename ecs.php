@@ -10,4 +10,4 @@ return ECSConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withRootFiles()
-    ->withPreparedSets(psr12: true, common: true);
+    ->withPreparedSets(true, true);

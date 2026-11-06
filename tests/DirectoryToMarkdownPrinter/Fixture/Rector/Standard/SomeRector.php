@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Standard;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Standard;
 
 use PhpParser\Node;
-use Rector\Contract\Rector\RectorInterface;
 use Rector\Rector\AbstractRector;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class SomeRector extends AbstractRector implements RectorInterface
+final class SomeRector extends AbstractRector implements DocumentedRuleInterface
 {
     public function getRuleDefinition(): RuleDefinition
     {

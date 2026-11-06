@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter;
 
-use Iterator;
-use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\RuleDocGenerator\DirectoryToMarkdownPrinter;
-use Symplify\RuleDocGenerator\Tests\AbstractTestCase;
-use Symplify\RuleDocGenerator\Tests\Fixture\StaticFixtureUpdater;
+use SimonSchaufi\RuleDocGenerator\DirectoryToMarkdownPrinter;
+use SimonSchaufi\RuleDocGenerator\Tests\AbstractTestCase;
+use SimonSchaufi\RuleDocGenerator\Tests\Fixture\StaticFixtureUpdater;
 
 final class DirectoryToMarkdownPrinterTest extends AbstractTestCase
 {
@@ -19,17 +17,7 @@ final class DirectoryToMarkdownPrinterTest extends AbstractTestCase
         $this->directoryToMarkdownPrinter = $this->make(DirectoryToMarkdownPrinter::class);
     }
 
-    #[DataProvider('provideData')]
-    public function test(string $directory, string $expectedFile, ?int $categorizeLevel = null): void
-    {
-        $fileContent = $this->directoryToMarkdownPrinter->print(__DIR__, [$directory], $categorizeLevel, []);
-
-        StaticFixtureUpdater::updateExpectedFixtureContent($fileContent, $expectedFile);
-
-        $this->assertStringEqualsFile($expectedFile, $fileContent, $directory);
-    }
-
-    public static function provideData(): Iterator
+    public static function provideData(): \Iterator
     {
         yield [__DIR__ . '/Fixture/PHPStan/Standard', __DIR__ . '/Expected/phpstan/phpstan_content.md'];
 
@@ -43,5 +31,17 @@ final class DirectoryToMarkdownPrinterTest extends AbstractTestCase
         yield [__DIR__ . '/Fixture/Rector/Standard', __DIR__ . '/Expected/rector/rector_content.md'];
 
         yield [__DIR__ . '/Fixture/Rector/Standard', __DIR__ . '/Expected/rector/rector_categorized.md', 1];
+    }
+
+    /**
+     * @dataProvider provideData()
+     */
+    public function test(string $directory, string $expectedFile, ?int $categorizeLevel = null): void
+    {
+        $fileContent = $this->directoryToMarkdownPrinter->print(__DIR__, [$directory], $categorizeLevel, []);
+
+        StaticFixtureUpdater::updateExpectedFixtureContent($fileContent, $expectedFile);
+
+        $this->assertStringEqualsFile($expectedFile, $fileContent, $directory);
     }
 }

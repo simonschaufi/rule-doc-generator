@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\Fixture;
+namespace SimonSchaufi\RuleDocGenerator\Tests\Fixture;
 
 use Nette\Utils\FileSystem;
 

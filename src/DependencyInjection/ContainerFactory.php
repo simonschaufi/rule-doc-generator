@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\DependencyInjection;
+namespace SimonSchaufi\RuleDocGenerator\DependencyInjection;
 
 use Illuminate\Container\Container;
 use ReflectionProperty;
 use SebastianBergmann\Diff\Differ;
 use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use SimonSchaufi\RuleDocGenerator\Command\GenerateCommand;
+use SimonSchaufi\RuleDocGenerator\Command\ValidateCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\RuleDocGenerator\Command\GenerateCommand;
-use Symplify\RuleDocGenerator\Command\ValidateCommand;
 
 /**
  * @api tests and bin file DI factory
@@ -30,6 +30,7 @@ final class ContainerFactory
 
             // this is required to show full diffs from start to end
             $contextLinesReflectionProperty = new ReflectionProperty($unifiedDiffOutputBuilder, 'contextLines');
+            $contextLinesReflectionProperty->setAccessible(true);
             $contextLinesReflectionProperty->setValue($unifiedDiffOutputBuilder, 10000);
 
             return new Differ($unifiedDiffOutputBuilder);
@@ -59,8 +60,7 @@ final class ContainerFactory
             $application->add($validateCommand);
 
             $this->propertyCallable($application, 'commands', static function (array $defaultCommands) {
-                unset($defaultCommands['completion']);
-                unset($defaultCommands['help']);
+                unset($defaultCommands['completion'], $defaultCommands['help']);
                 return $defaultCommands;
             });
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer\Markdown;
+namespace SimonSchaufi\RuleDocGenerator\Printer\Markdown;
 
 final class MarkdownCodeWrapper
 {

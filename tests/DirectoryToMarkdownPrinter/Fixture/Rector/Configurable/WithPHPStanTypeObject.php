@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Configurable;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Configurable;
 
+use PhpParser\Node;
 use PHPStan\Type\ObjectType;
 use Rector\Contract\Rector\RectorInterface;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Source\SomeValueObjectWrapper;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Source\SomeValueObjectWrapper;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class WithPHPStanTypeObject implements RectorInterface, ConfigurableRuleInterface
 {
@@ -39,5 +40,13 @@ CODE_SAMPLE
                 $exampleConfiguration
             ),
         ]);
+    }
+
+    public function getNodeTypes(): array
+    {
+    }
+
+    public function refactor(Node $node)
+    {
     }
 }

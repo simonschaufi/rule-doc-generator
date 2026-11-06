@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator;
+namespace SimonSchaufi\RuleDocGenerator;
 
 use ReflectionClass;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
-use Symplify\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\Exception\ShouldNotHappenException;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class RuleDefinitionsResolver
 {

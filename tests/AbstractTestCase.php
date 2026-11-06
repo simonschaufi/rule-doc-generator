@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests;
+namespace SimonSchaufi\RuleDocGenerator\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Symplify\RuleDocGenerator\DependencyInjection\ContainerFactory;
+use SimonSchaufi\RuleDocGenerator\DependencyInjection\ContainerFactory;
 use Webmozart\Assert\Assert;
 
 abstract class AbstractTestCase extends TestCase

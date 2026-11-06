@@ -2,25 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Command;
+namespace SimonSchaufi\RuleDocGenerator\Command;
 
 use ReflectionClass;
+use SimonSchaufi\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
+use SimonSchaufi\RuleDocGenerator\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
-use Symplify\RuleDocGenerator\ValueObject\Option;
 
 final class ValidateCommand extends Command
 {
+    private SymfonyStyle $symfonyStyle;
+
+    private RuleDefinitionClassesFinder $ruleDefinitionClassesFinder;
+
     public function __construct(
-        private readonly SymfonyStyle $symfonyStyle,
-        private readonly RuleDefinitionClassesFinder $ruleDefinitionClassesFinder,
+        SymfonyStyle $symfonyStyle,
+        RuleDefinitionClassesFinder $ruleDefinitionClassesFinder
     ) {
+        $this->ruleDefinitionClassesFinder = $ruleDefinitionClassesFinder;
+        $this->symfonyStyle = $symfonyStyle;
         parent::__construct();
     }
 

@@ -2,20 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
-use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
+use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\BadGoodCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class ECSRuleCodeSamplePrinter implements RuleCodeSamplePrinterInterface
 {
+    private BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter;
+
+    private DiffCodeSamplePrinter $diffCodeSamplePrinter;
+
     public function __construct(
-        private readonly BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter,
-        private readonly DiffCodeSamplePrinter $diffCodeSamplePrinter
+        BadGoodCodeSamplePrinter $badGoodCodeSamplePrinter,
+        DiffCodeSamplePrinter $diffCodeSamplePrinter
     ) {
+        $this->diffCodeSamplePrinter = $diffCodeSamplePrinter;
+        $this->badGoodCodeSamplePrinter = $badGoodCodeSamplePrinter;
     }
 
     public function isMatch(string $class): bool

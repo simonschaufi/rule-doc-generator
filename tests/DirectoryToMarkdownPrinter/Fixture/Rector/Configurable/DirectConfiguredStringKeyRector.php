@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Configurable;
+namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\Fixture\Rector\Configurable;
 
+use PhpParser\Node;
 use Rector\Contract\Rector\RectorInterface;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class DirectConfiguredStringKeyRector implements RectorInterface, ConfigurableRuleInterface
 {
@@ -28,5 +29,13 @@ CODE_SAMPLE,
                 ]
             ),
         ]);
+    }
+
+    public function getNodeTypes(): array
+    {
+    }
+
+    public function refactor(Node $node)
+    {
     }
 }

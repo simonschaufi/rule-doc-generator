@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
-use Symplify\RuleDocGenerator\Exception\ConfigurationBoundException;
-use Symplify\RuleDocGenerator\RuleCodeSamplePrinter\ECSRuleCodeSamplePrinter;
-use Symplify\RuleDocGenerator\RuleCodeSamplePrinter\PHPStanRuleCodeSamplePrinter;
-use Symplify\RuleDocGenerator\RuleCodeSamplePrinter\RectorRuleCodeSamplePrinter;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\ConfigurableRuleInterface;
+use SimonSchaufi\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
+use SimonSchaufi\RuleDocGenerator\Exception\ConfigurationBoundException;
+use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\ECSRuleCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\PHPStanRuleCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\RuleCodeSamplePrinter\RectorRuleCodeSamplePrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use SimonSchaufi\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Symplify\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\DirectoryToMarkdownPrinterTest
+ * @see \SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter\DirectoryToMarkdownPrinterTest
  */
 final class CodeSamplePrinter
 {
     /**
      * @var RuleCodeSamplePrinterInterface[]
      */
-    private array $ruleCodeSamplePrinters = [];
+    private array $ruleCodeSamplePrinters;
 
     public function __construct(
         ECSRuleCodeSamplePrinter $ecsRuleCodeSamplePrinter,
         PHPStanRuleCodeSamplePrinter $phpStanRuleCodeSamplePrinter,
-        RectorRuleCodeSamplePrinter $rectorRuleCodeSamplePrinter,
+        RectorRuleCodeSamplePrinter $rectorRuleCodeSamplePrinter
     ) {
         $this->ruleCodeSamplePrinters = [
             $ecsRuleCodeSamplePrinter,

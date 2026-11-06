@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Command;
+namespace SimonSchaufi\RuleDocGenerator\Command;
 
 use Nette\Utils\FileSystem;
+use SimonSchaufi\RuleDocGenerator\DirectoryToMarkdownPrinter;
+use SimonSchaufi\RuleDocGenerator\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\RuleDocGenerator\DirectoryToMarkdownPrinter;
-use Symplify\RuleDocGenerator\ValueObject\Option;
 use Webmozart\Assert\Assert;
 
 final class GenerateCommand extends Command
@@ -27,10 +27,16 @@ final class GenerateCommand extends Command
      */
     private const README_PLACEHOLDER_END = '<!-- ruledoc-end -->';
 
+    private DirectoryToMarkdownPrinter $directoryToMarkdownPrinter;
+
+    private SymfonyStyle $symfonyStyle;
+
     public function __construct(
-        private readonly DirectoryToMarkdownPrinter $directoryToMarkdownPrinter,
-        private readonly SymfonyStyle $symfonyStyle,
+        DirectoryToMarkdownPrinter $directoryToMarkdownPrinter,
+        SymfonyStyle $symfonyStyle
     ) {
+        $this->symfonyStyle = $symfonyStyle;
+        $this->directoryToMarkdownPrinter = $directoryToMarkdownPrinter;
         parent::__construct();
     }
 

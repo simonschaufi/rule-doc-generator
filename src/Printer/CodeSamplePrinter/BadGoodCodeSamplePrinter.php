@@ -2,16 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
+namespace SimonSchaufi\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
+use SimonSchaufi\RuleDocGenerator\Contract\CodeSampleInterface;
+use SimonSchaufi\RuleDocGenerator\Printer\Markdown\MarkdownCodeWrapper;
 
 final class BadGoodCodeSamplePrinter
 {
+    private MarkdownCodeWrapper $markdownCodeWrapper;
+
     public function __construct(
-        private readonly MarkdownCodeWrapper $markdownCodeWrapper
+        MarkdownCodeWrapper $markdownCodeWrapper
     ) {
+        $this->markdownCodeWrapper = $markdownCodeWrapper;
     }
 
     /**
