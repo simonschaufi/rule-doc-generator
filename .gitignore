@@ -1,4 +1,10 @@
-/vendor
-/.phpunit.cache
-/.phpunit.result.cache
+# Ignore hidden files and directories in the root, except these
+/.*
+!/.editorconfig
+!/.gitattributes
+!/.github
+!/.gitignore
+!/.phpstorm.meta.php
+
 /composer.lock
+/vendor
