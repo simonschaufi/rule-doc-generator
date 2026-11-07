@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SimonSchaufi\RuleDocGenerator\Tests\DirectoryToMarkdownPrinter;
 
-use SimonSchaufi\RuleDocGenerator\DirectoryToMarkdownPrinter;
+use SimonSchaufi\RuleDocGenerator\Printer\DirectoryToMarkdownPrinter;
 use SimonSchaufi\RuleDocGenerator\Tests\AbstractTestCase;
 use SimonSchaufi\RuleDocGenerator\Tests\Fixture\StaticFixtureUpdater;
 

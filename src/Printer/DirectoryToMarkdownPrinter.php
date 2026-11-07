@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SimonSchaufi\RuleDocGenerator;
+namespace SimonSchaufi\RuleDocGenerator\Printer;
 
 use Rector\RuleDoc\Exception\ShouldNotHappenException;
 use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
-use SimonSchaufi\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
+use SimonSchaufi\RuleDocGenerator\RuleDefinitionsResolver;
 use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
