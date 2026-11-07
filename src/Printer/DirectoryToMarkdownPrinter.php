@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SimonSchaufi\RuleDocGenerator;
+namespace SimonSchaufi\RuleDocGenerator\Printer;
 
 use Rector\RuleDoc\Exception\ShouldNotHappenException;
 use SimonSchaufi\RuleDocGenerator\FileSystem\RuleDefinitionClassesFinder;
-use SimonSchaufi\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
+use SimonSchaufi\RuleDocGenerator\RuleDefinitionsResolver;
 use SimonSchaufi\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -63,11 +63,11 @@ final class DirectoryToMarkdownPrinter
         // 2. create rule definition collection
         $this->symfonyStyle->note('Resolving rule definitions');
 
-        $ruleDefinitions = $this->ruleDefinitionsResolver->resolveFromClassNames($ruleWithFilePaths);
+        $documentedRules = $this->ruleDefinitionsResolver->resolveFromClassNames($ruleWithFilePaths);
 
         // 3. print rule definitions to markdown lines
         $this->symfonyStyle->note('Printing rule definitions');
-        $markdownLines = $this->ruleDefinitionsPrinter->print($ruleDefinitions, $categorizeLevel);
+        $markdownLines = $this->ruleDefinitionsPrinter->print($documentedRules, $categorizeLevel);
 
         $fileContent = '';
         foreach ($markdownLines as $markdownLine) {

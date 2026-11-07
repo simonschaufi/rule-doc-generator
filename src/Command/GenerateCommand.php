@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SimonSchaufi\RuleDocGenerator\Command;
 
 use Nette\Utils\FileSystem;
-use SimonSchaufi\RuleDocGenerator\DirectoryToMarkdownPrinter;
+use SimonSchaufi\RuleDocGenerator\Printer\DirectoryToMarkdownPrinter;
 use SimonSchaufi\RuleDocGenerator\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
